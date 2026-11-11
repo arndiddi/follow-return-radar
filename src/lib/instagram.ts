@@ -8,7 +8,7 @@ export type Account = {
   username: string;
   href: string;
   /** Unix seconds when the follow happened, when Instagram includes it. */
-  timestamp?: number;
+  timestamp?: number | undefined;
 };
 
 export type ListKind = "followers" | "following";

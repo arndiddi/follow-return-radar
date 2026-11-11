@@ -18,7 +18,7 @@ export function Dropzone({ onLoaded }: { onLoaded: (data: LoadedData, label: str
     try {
       const list = Array.from(files);
       const data = await loadInstagramFiles(list);
-      onLoaded(data, list.length === 1 ? list[0].name : `${list.length} files`);
+      onLoaded(data, list.length === 1 && list[0] ? list[0].name : `${list.length} files`);
     } catch (e) {
       setError(e instanceof Error ? e.message : "That file couldn't be read.");
     } finally {
