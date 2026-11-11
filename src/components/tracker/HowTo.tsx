@@ -42,6 +42,10 @@ export function HowTo() {
         ))}
       </ol>
       <p className="mt-5 text-sm text-muted-foreground">
+        Instagram pings you when the export is ready — you only get four days to download it, so
+        grab it as soon as the notification lands.
+      </p>
+      <p className="mt-2 text-sm text-muted-foreground">
         Why a file? Instagram doesn't let outside apps see your follower list, so this is the only
         way that doesn't require handing over your password.
       </p>
