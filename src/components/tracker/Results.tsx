@@ -188,7 +188,13 @@ function Stat({
 }) {
   return (
     <div className="glass group relative overflow-hidden rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:border-signal/40">
-      <span className={cn("absolute inset-x-0 top-0 h-px", tone)} />
+      <span className={cn("absolute inset-x-0 top-0 h-0.5 opacity-80", tone)} />
+      <span
+        className={cn(
+          "pointer-events-none absolute -right-10 -top-10 size-28 rounded-full opacity-25 blur-2xl transition-opacity duration-300 group-hover:opacity-60",
+          tone,
+        )}
+      />
       <dt className="tag-label text-muted-foreground">{label}</dt>
       <dd className="mt-3 font-display text-5xl font-bold leading-none">{value}</dd>
     </div>

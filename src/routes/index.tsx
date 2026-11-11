@@ -57,7 +57,7 @@ function Index() {
                   <span className="size-1.5 animate-pulse rounded-full bg-signal" />
                   Instagram follow-back checker
                 </span>
-                <h1 className="mt-6 font-display text-6xl font-bold leading-[0.9] sm:text-8xl">
+                <h1 className="mt-6 font-display text-6xl font-bold leading-[0.9] sm:text-7xl lg:text-8xl">
                   You follow them.
                   <br />
                   <span className="gradient-text animate-sheen">Do they follow you?</span>
