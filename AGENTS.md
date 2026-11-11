@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Instagram export parsing/comparison lives in pure functions in `src/lib/instagram.ts` (tested); file/ZIP reading is in `src/lib/instagram-files.ts`. Why: Instagram has no API for follower lists, so all data comes from the user's own export and is processed only in the browser.
