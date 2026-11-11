@@ -4,16 +4,16 @@ const steps = [
     body: "In Instagram, go to your profile → menu (☰) → Accounts Center → Your information and permissions.",
   },
   {
-    title: "Download your information",
-    body: "Tap Download your information → Download or transfer information → pick your Instagram account.",
+    title: "Export your information",
+    body: "Tap Export your information → Create export, then pick your Instagram account.",
   },
   {
-    title: "Choose only followers",
-    body: "Select Some of your information, tick Followers and following, then Download to device.",
+    title: "Choose where to export",
+    body: "Pick Device (not an external service) so the file lands on your phone.",
   },
   {
-    title: "Pick JSON, all time",
-    body: "Set Date range to All time and Format to JSON. Instagram emails you a link — usually within minutes.",
+    title: "Confirm your export",
+    body: "Under Customize information, choose Some of your information and tick Followers and following. Then set Date range to All time and Format to JSON before you confirm.",
   },
 ];
 
