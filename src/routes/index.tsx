@@ -32,29 +32,37 @@ function Index() {
 
   return (
     <div className="min-h-screen">
-      <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-        <button onClick={() => setLoaded(null)} className="font-display text-2xl italic">
-          Unrequited<span className="text-signal">.</span>
-        </button>
-        <span className="tag-label flex items-center gap-2 text-muted-foreground">
-          <Lock className="size-3" /> Private · runs on your device
-        </span>
+      <header className="sticky top-0 z-20 border-b border-rule/70 bg-paper/70 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
+          <button
+            onClick={() => setLoaded(null)}
+            className="font-display text-xl font-bold text-foreground"
+          >
+            Unrequited<span className="gradient-text">.</span>
+          </button>
+          <span className="glass tag-label flex items-center gap-2 rounded-full px-3.5 py-1.5 text-muted-foreground">
+            <Lock className="size-3 text-signal" /> Private · runs on your device
+          </span>
+        </div>
       </header>
 
-      <main className="mx-auto max-w-6xl px-6 pb-24 pt-8">
+      <main className="mx-auto max-w-6xl px-6 pb-24 pt-10">
         {loaded ? (
           <Results data={loaded.data} label={loaded.label} onReset={() => setLoaded(null)} />
         ) : (
           <div className="space-y-20">
-            <section className="grid items-center gap-12 lg:grid-cols-[1.1fr_1fr]">
+            <section className="grid items-center gap-12 lg:grid-cols-[1.08fr_1fr]">
               <div className="animate-rise">
-                <p className="tag-label text-signal">Instagram follow-back checker</p>
-                <h1 className="mt-4 font-display text-6xl leading-[0.95] sm:text-8xl">
+                <span className="glass tag-label inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-signal">
+                  <span className="size-1.5 animate-pulse rounded-full bg-signal" />
+                  Instagram follow-back checker
+                </span>
+                <h1 className="mt-6 font-display text-6xl font-bold leading-[0.9] sm:text-8xl">
                   You follow them.
                   <br />
-                  <em className="text-muted-foreground">Do they follow you?</em>
+                  <span className="gradient-text animate-sheen">Do they follow you?</span>
                 </h1>
-                <p className="mt-6 max-w-md text-lg leading-relaxed text-muted-foreground">
+                <p className="mt-7 max-w-md text-lg leading-relaxed text-muted-foreground">
                   Drop in the file Instagram gives you and see exactly who doesn't follow you back —
                   no password, no login, nothing uploaded.
                 </p>

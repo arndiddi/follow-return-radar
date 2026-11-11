@@ -28,7 +28,7 @@ export function Dropzone({ onLoaded }: { onLoaded: (data: LoadedData, label: str
   }
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       <button
         type="button"
         onClick={() => inputRef.current?.click()}
@@ -43,25 +43,34 @@ export function Dropzone({ onLoaded }: { onLoaded: (data: LoadedData, label: str
           handle(e.dataTransfer.files);
         }}
         className={cn(
-          "group relative flex w-full flex-col items-center justify-center gap-4 rounded-sm border-2 border-dashed border-input bg-card px-6 py-14 text-center transition-all",
-          "hover:border-signal hover:bg-signal-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-          dragging && "border-signal bg-signal-soft scale-[1.01]",
+          "group gradient-border relative flex w-full flex-col items-center justify-center gap-5 overflow-hidden rounded-3xl px-8 py-14 text-center transition-all duration-300",
+          "hover:-translate-y-1 hover:glow-signal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+          dragging && "-translate-y-1 glow-signal",
         )}
       >
-        <span className="flex size-14 items-center justify-center rounded-full border border-input bg-background transition-transform group-hover:-rotate-6">
+        <span className="drop-glow pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        <span
+          className={cn(
+            "gradient-bg glow-signal relative flex size-16 items-center justify-center rounded-2xl text-signal-foreground transition-transform duration-300",
+            "group-hover:-rotate-6 group-hover:scale-105",
+            dragging && "scale-110",
+          )}
+        >
           {busy ? (
-            <Loader2 className="size-6 animate-spin text-signal" />
+            <Loader2 className="size-7 animate-spin" />
           ) : dragging ? (
-            <FileArchive className="size-6 text-signal" />
+            <FileArchive className="size-7" />
           ) : (
-            <Upload className="size-6" />
+            <Upload className="size-7" />
           )}
         </span>
-        <span className="font-display text-3xl">
-          {busy ? "Reading your file…" : "Drop your Instagram file here"}
-        </span>
-        <span className="tag-label text-muted-foreground">
-          .zip from Instagram · or followers_1 + following files
+        <span className="relative space-y-2">
+          <span className="block font-display text-3xl font-bold text-foreground">
+            {busy ? "Reading your file…" : "Drop your Instagram file here"}
+          </span>
+          <span className="tag-label block text-muted-foreground">
+            .zip from Instagram · or followers_1 + following files
+          </span>
         </span>
       </button>
       <input
@@ -74,16 +83,22 @@ export function Dropzone({ onLoaded }: { onLoaded: (data: LoadedData, label: str
         onChange={(e) => handle(e.target.files)}
       />
       {error && (
-        <p role="alert" className="rounded-sm border border-signal/40 bg-signal-soft px-4 py-3 text-sm">
+        <p
+          role="alert"
+          className="rounded-2xl border border-signal/40 bg-signal-soft px-4 py-3 text-sm text-foreground"
+        >
           {error}
         </p>
       )}
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm text-muted-foreground">
-          Your file never leaves this browser tab.
-        </p>
-        <Button variant="link" size="sm" className="px-0" onClick={() => onLoaded(sampleData(), "Sample account")}>
-          Try it with sample data →
+        <p className="text-sm text-muted-foreground">Your file never leaves this browser tab.</p>
+        <Button
+          variant="outline"
+          size="sm"
+          className="text-signal"
+          onClick={() => onLoaded(sampleData(), "Sample account")}
+        >
+          Try sample data →
         </Button>
       </div>
     </div>
