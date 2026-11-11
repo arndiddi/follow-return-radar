@@ -4,16 +4,16 @@ const steps = [
     body: "In Instagram, go to your profile → menu (☰) → Accounts Center → Your information and permissions.",
   },
   {
-    title: "Download your information",
-    body: "Tap Download your information → Download or transfer information → pick your Instagram account.",
+    title: "Export your information",
+    body: "Tap Export your information → Create export, then pick your Instagram account.",
   },
   {
-    title: "Choose only followers",
-    body: "Select Some of your information, tick Followers and following, then Download to device.",
+    title: "Choose where to export",
+    body: "Pick Device (not an external service) so the file lands on your phone.",
   },
   {
-    title: "Pick JSON, all time",
-    body: "Set Date range to All time and Format to JSON. Instagram emails you a link — usually within minutes.",
+    title: "Confirm your export",
+    body: "Under Customize information, choose Some of your information and tick Followers and following. Then set Date range to All time and Format to JSON before you confirm.",
   },
 ];
 
@@ -42,6 +42,10 @@ export function HowTo() {
         ))}
       </ol>
       <p className="mt-5 text-sm text-muted-foreground">
+        Instagram pings you when the export is ready — you only get four days to download it, so
+        grab it as soon as the notification lands.
+      </p>
+      <p className="mt-2 text-sm text-muted-foreground">
         Why a file? Instagram doesn't let outside apps see your follower list, so this is the only
         way that doesn't require handing over your password.
       </p>
