@@ -66,10 +66,13 @@ export function Results({
     <div className="animate-rise space-y-10">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="tag-label text-muted-foreground">Report · {label}</p>
-          <h1 className="mt-2 font-display text-5xl leading-none sm:text-7xl">
-            <span className="text-signal">{result.notFollowingBack.length}</span>{" "}
-            {result.notFollowingBack.length === 1 ? "person doesn't" : "people don't"} follow you back.
+          <p className="glass tag-label inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-muted-foreground">
+            <span className="size-1.5 animate-pulse rounded-full bg-signal" /> Report · {label}
+          </p>
+          <h1 className="mt-4 font-display text-5xl font-bold leading-[0.92] sm:text-7xl">
+            <span className="gradient-text animate-sheen">{result.notFollowingBack.length}</span>{" "}
+            {result.notFollowingBack.length === 1 ? "person doesn't" : "people don't"} follow you
+            back.
           </h1>
         </div>
         <Button variant="outline" size="sm" onClick={onReset}>
@@ -77,15 +80,18 @@ export function Results({
         </Button>
       </div>
 
-      <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-rule bg-rule md:grid-cols-4">
-        <Stat label="Following" value={data.following.length} />
-        <Stat label="Followers" value={data.followers.length} />
-        <Stat label="Mutuals" value={result.mutuals.length} />
-        <Stat label="Follow-back rate" value={`${ratio}%`} />
+      <dl className="grid grid-cols-2 gap-4 md:grid-cols-4">
+        <Stat label="Following" value={data.following.length} tone="bg-beam" />
+        <Stat label="Followers" value={data.followers.length} tone="bg-violet" />
+        <Stat label="Mutuals" value={result.mutuals.length} tone="bg-moss" />
+        <Stat label="Follow-back rate" value={`${ratio}%`} tone="gradient-bg" />
       </dl>
 
       <div>
-        <div role="tablist" className="flex flex-wrap gap-2 border-b border-rule">
+        <div
+          role="tablist"
+          className="glass inline-flex flex-wrap gap-1 rounded-full p-1.5"
+        >
           {tabs.map((t) => (
             <button
               key={t.key}
@@ -93,17 +99,19 @@ export function Results({
               aria-selected={tab === t.key}
               onClick={() => setTab(t.key)}
               className={cn(
-                "-mb-px flex items-center gap-2 border-b-2 px-1 pb-3 pr-4 text-sm font-medium transition-colors",
+                "flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200",
                 tab === t.key
-                  ? "border-signal text-foreground"
-                  : "border-transparent text-muted-foreground hover:text-foreground",
+                  ? "gradient-bg glow-signal text-signal-foreground"
+                  : "text-muted-foreground hover:bg-secondary hover:text-foreground",
               )}
             >
               {t.label}
               <span
                 className={cn(
                   "rounded-full px-2 py-0.5 font-mono text-xs",
-                  tab === t.key ? "bg-signal text-signal-foreground" : "bg-muted",
+                  tab === t.key
+                    ? "bg-signal-foreground/15 text-signal-foreground"
+                    : "bg-muted text-muted-foreground",
                 )}
               >
                 {result[t.key].length}
@@ -116,23 +124,25 @@ export function Results({
           <p className="text-sm text-muted-foreground">{active.blurb}</p>
           <div className="flex flex-wrap items-center gap-2">
             <div className="relative">
-              <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+              <Search className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search username"
                 aria-label="Search username"
-                className="w-52 bg-card pl-9"
+                className="glass h-9 w-52 rounded-full border-input pl-10"
               />
             </div>
-            <div className="flex rounded-md border border-input bg-card p-0.5">
+            <div className="glass flex rounded-full p-1">
               {sorts.map((s) => (
                 <button
                   key={s.key}
                   onClick={() => setSort(s.key)}
                   className={cn(
-                    "rounded px-2.5 py-1 font-mono text-xs transition-colors",
-                    sort === s.key ? "bg-ink text-paper" : "text-muted-foreground hover:text-foreground",
+                    "rounded-full px-3 py-1 font-mono text-xs transition-all duration-200",
+                    sort === s.key
+                      ? "gradient-bg text-signal-foreground"
+                      : "text-muted-foreground hover:text-foreground",
                   )}
                 >
                   {s.label}
@@ -142,17 +152,19 @@ export function Results({
             <Button variant="outline" size="sm" onClick={copyList} disabled={!list.length}>
               Copy
             </Button>
-            <Button variant="ink" size="sm" onClick={downloadCsv} disabled={!list.length}>
+            <Button variant="signal" size="sm" onClick={downloadCsv} disabled={!list.length}>
               <Download /> CSV
             </Button>
           </div>
         </div>
 
-        <ul className="mt-6 rounded-sm border border-rule bg-card">
+        <ul className="glass mt-6 overflow-hidden rounded-2xl">
           {list.length === 0 ? (
-            <li className="px-6 py-16 text-center">
-              <p className="font-display text-3xl">{query ? "No matches." : "Nobody here."}</p>
-              <p className="mt-2 text-sm text-muted-foreground">
+            <li className="px-6 py-20 text-center">
+              <p className="font-display text-4xl font-bold">
+                {query ? <span className="gradient-text">No matches.</span> : "Nobody here."}
+              </p>
+              <p className="mt-3 text-sm text-muted-foreground">
                 {query ? "Try a different spelling." : "Nice — this list is empty."}
               </p>
             </li>
@@ -165,29 +177,44 @@ export function Results({
   );
 }
 
-function Stat({ label, value }: { label: string; value: number | string }) {
+function Stat({
+  label,
+  value,
+  tone,
+}: {
+  label: string;
+  value: number | string;
+  tone: string;
+}) {
   return (
-    <div className="bg-card p-5">
+    <div className="glass group relative overflow-hidden rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:border-signal/40">
+      <span className={cn("absolute inset-x-0 top-0 h-0.5 opacity-80", tone)} />
+      <span
+        className={cn(
+          "pointer-events-none absolute -right-10 -top-10 size-28 rounded-full opacity-25 blur-2xl transition-opacity duration-300 group-hover:opacity-60",
+          tone,
+        )}
+      />
       <dt className="tag-label text-muted-foreground">{label}</dt>
-      <dd className="mt-2 font-display text-5xl leading-none">{value}</dd>
+      <dd className="mt-3 font-display text-5xl font-bold leading-none">{value}</dd>
     </div>
   );
 }
 
 function Row({ account, index }: { account: Account; index: number }) {
   return (
-    <li className="ledger-row flex items-center gap-4 px-4 py-3 last:border-b-0 sm:px-6">
-      <span className="w-8 shrink-0 font-mono text-xs text-muted-foreground">
+    <li className="ledger-row group flex items-center gap-4 px-4 py-3 transition-colors last:border-b-0 hover:bg-secondary/50 sm:px-6">
+      <span className="w-8 shrink-0 font-mono text-xs text-muted-foreground/70">
         {String(index + 1).padStart(3, "0")}
       </span>
-      <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-secondary font-display text-lg uppercase">
+      <span className="glass flex size-10 shrink-0 items-center justify-center rounded-full font-display text-lg font-bold uppercase text-muted-foreground transition-all duration-300 group-hover:gradient-bg group-hover:text-signal-foreground">
         {account.username.replace(/[^a-z0-9]/g, "").charAt(0) || "·"}
       </span>
       <a
         href={account.href}
         target="_blank"
         rel="noreferrer"
-        className="min-w-0 flex-1 truncate font-medium hover:text-signal hover:underline"
+        className="min-w-0 flex-1 truncate font-medium text-foreground hover:text-signal"
       >
         @{account.username}
       </a>
@@ -201,7 +228,7 @@ function Row({ account, index }: { account: Account; index: number }) {
         target="_blank"
         rel="noreferrer"
         aria-label={`Open @${account.username} on Instagram`}
-        className="flex size-8 items-center justify-center rounded-full border border-input text-muted-foreground transition-colors hover:border-signal hover:bg-signal hover:text-signal-foreground"
+        className="flex size-8 items-center justify-center rounded-full border border-input text-muted-foreground transition-all duration-200 hover:gradient-bg hover:text-signal-foreground"
       >
         <ArrowUpRight className="size-4" />
       </a>
