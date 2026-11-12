@@ -1,6 +1,6 @@
 # Follow Return Radar
 
-I want to make a instagram follower tracker that tracks who i follow and who doesnt follow me back
+I want to make a instagram follower tracker that tracks who I follow and who doesnt follow me back
 
 This project was built with [Lovable](https://lovable.dev).
 
